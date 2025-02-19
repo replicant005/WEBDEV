@@ -1,1 +1,12 @@
-- search query is fr input taht user enters into the search bar
+- id search query is for input that user enters into the search bar
+- the part which showcases the result is search results 
+- 
+in js we make a function , searchContacts , which basically has 
+
+- a variable which stores the value whichhas been entered in search qyuery , so basically whatever has been inputted by the user 
+- 
+
+[[ in the search api , i have a variable $query , which stores value for the parmeter passedin the url 
+the code for it is as follows: 
+$query = $_GET ['query'] ?? '';
+so if there is a value in the $_GET array that is considered as a parameter , if there is none it allocates an empty string to the paarameter 
