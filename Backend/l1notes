@@ -1,0 +1,58 @@
+what we did for l1 : 
+setting up the express for application 
+so express is a js framework which we access from excpress package from node modules downloaded by npm install 
+// comands to remember to dowmload packages : 
+- mpm init -y (creates package json)
+- npm install (downlaods node modules)
+
+we store environmnet variables in .env file and to use it we make a process.env object which gives us access to the partticular variable in env file 
+
+
+------------------------------------------------------
+require('dotenv').config()  - this loads .env variables into process.env object , helps store sensitive data outside the code 
+
+const express = require('express') - exporting the express lib
+// express app
+const app = express() - declaring an express app, app object is now used to define routes, middleware and staring the server 
+
+// middleware   - middleware function that runs before every request , it takes in 3 parameters request , response , next (next is a function , calling which will make the request move to next piece of middleware or function)
+ so this basically is a global middleware, inside this middleware i will add the behavior i want every request to follow , so i console log the request path and request method 
+so this is for all requests entering no matter from what route
+app.use((req, res, next) => {
+  console.log(req.path, req.method)
+  next()
+})
+
+// routes - here we have another function / route handler to handle when browser makes a get request ,this is basically an api that tells what to do when browser requeests to get the root url or / endpoint, it basically would respond with a json file with the specified text
+// this route handler is for / endpoint , ie whenever user is on localhost:4000/ , this will the response to the request made through that rouute or *api endpoint*. 
+app.get('/', (req, res) => {
+  res.json({mssg: 'Welcome to the app'})
+})
+
+// just like above we could be creating more route handlers or 
+
+// listen for requests
+app.listen(process.env.PORT, () => {
+  console.log('listening on port', process.env.PORT)
+})
+---------------------------------------------------------
+
+API endpoint consists of :
+- base url : localhost: 4000
+- path / route - /
+- http method - get  
+** remember : route is a part of api endpoint. 
+
+A route handler is function that runs when a particukar API endpoint is requested.
+eg: 
+app.http method (path , function that will be ewxecuted when user requests this)
+app.get('/users', (req, res) => {
+  res.json([{ id: 1, name: 'mhk' }, { id: 2, name: 'prs' }])
+})
+
+Middleware is a function that runs even before requests reach the route handler, it can modify the requests as well . 
+// Middleware to log request details
+app.use((req, res, next) => {
+  console.log(`Request: ${req.method} ${req.path}`)
+  next() // Moves to the next middleware or route handler
+})
