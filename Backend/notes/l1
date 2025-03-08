@@ -56,3 +56,41 @@ app.use((req, res, next) => {
   console.log(`Request: ${req.method} ${req.path}`)
   next() // Moves to the next middleware or route handler
 })
+
+
+
+-------------><--------------
+
+once we have set up the database we just need to set up a way to interact with it, so for rhat we set up the schemas , 
+
+const mongoose = require('mongoose') -- we export mongoose from node modules.
+cosnt Schema = mongoose.Schema - settting up a new Schema class 
+
+here we are making a new object which will form the schema as per whichh data will be stored , like whatever parameters i pass in should be there in the post body before getting saved. 
+const workOutSchema = new Schema ({  
+
+title : {
+        type : String,
+        required : true
+    },
+
+reps : {
+type : Number,
+required :true
+    },
+
+load : {
+        type : Number,
+        required : true
+    }
+    
+}, {timestamps : true})
+
+} // the firsst argument tells us how to data entered to the db should look like , the secomd argument specifies the time at which the new document is created. 
+
+-- now as i have made a schema , i am gonna create a new model based on this schema 
+module.exports = mongoose.model('Workout', workoutSchema) - so this is a new model named workout which implemets the workoutSchema
+
+now we are gonna import the model Workout in other files and interact w it
+so we can use Workout.find() to all the records or a particular one within the db 
+
